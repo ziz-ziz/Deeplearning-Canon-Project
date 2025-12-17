@@ -31,6 +31,8 @@ yolo/runs/
 *.pth
 *.weights
 *.onnx
+# best.pt 파일만 예외로 포함
+!yolo/runs/**/weights/best.pt
 
 # Data (용량이 큰 데이터셋은 제외)
 yolo/data/images/*
