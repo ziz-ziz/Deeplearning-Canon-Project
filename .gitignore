@@ -33,8 +33,13 @@ yolo/runs/
 *.onnx
 
 # Data (용량이 큰 데이터셋은 제외)
-yolo/data/images/
-yolo/data/labels/
+yolo/data/images/*
+yolo/data/labels/*
+# 빈 폴더 유지를 위한 .gitkeep 파일은 포함
+!yolo/data/images/train/.gitkeep
+!yolo/data/images/val/.gitkeep
+!yolo/data/labels/train/.gitkeep
+!yolo/data/labels/val/.gitkeep
 
 # Results
 yolo/val_inference_results/
