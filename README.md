@@ -84,6 +84,33 @@ CUDA 지원 GPU (권장)
 pip install ultralytics torch torchvision gradio pillow
 ```
 
+## ⚠️ 데이터 준비
+
+**주의**: 본 저장소에는 기업 데이터가 포함되어 있지 않습니다. 학습 및 검증을 위해서는 자체 데이터를 준비해야 합니다.
+
+### 데이터 구조
+
+다음 경로에 이미지와 라벨 파일을 추가하세요:
+
+```
+yolo/data/
+├── images/
+│   ├── train/        # 학습용 이미지 (.jpg, .jpeg, .png 등)
+│   └── val/          # 검증용 이미지
+└── labels/
+    ├── train/        # 학습용 라벨 (.txt, YOLO 세그멘테이션 형식)
+    └── val/          # 검증용 라벨
+```
+
+### 라벨 형식
+
+YOLO 세그멘테이션 형식 (.txt):
+```
+<class_id> <x1> <y1> <x2> <y2> ... <xn> <yn>
+```
+- `class_id`: 0-27 (클래스 ID)
+- `x, y`: 정규화된 폴리곤 좌표 (0.0 ~ 1.0)
+
 ### 모델 학습
 
 ```bash
@@ -96,15 +123,62 @@ python train.py
 - 이미지 크기: 1024x1024
 - Epochs: 100
 - Batch size: 8
+- **결과 저장 경로**: `yolo/runs/segment/canon_yolo11m_1203/`
+  - **학습 가중치**: `yolo/runs/segment/canon_yolo11m_1203/weights/best.pt`
+  - **학습 로그**: `yolo/runs/segment/canon_yolo11m_1203/results.csv`
+  - **검증 이미지**: `yolo/runs/segment/canon_yolo11m_1203/val_batch*.jpg`
 
-### 검증 실행
+### 검증/추론 실행
+
+#### 1. 경로 설정
+
+`yolo/scripts/inference.py` 파일을 열고 다음 경로들을 수정하세요:
+
+```python
+# 모델 가중치 경로 (학습된 best.pt 파일)
+MODEL_PATH = "/home/injaejung/canon/yolo/runs/segment/canon_yolo11m_1203/weights/best.pt"
+
+# 추론할 이미지 폴더 경로 (검증 데이터 또는 테스트 데이터)
+SOURCE = "/home/injaejung/canon/yolo/data/images/val"
+
+# 결과 저장 폴더
+PROJECT = "/home/injaejung/canon/yolo/val_inference_results"
+
+# 실험 이름 (결과 폴더명)
+NAME = "canon_yolo11m_1213_val"
+
+# PASS 데이터 통계 파일 경로 (레이아웃 검증용)
+LAYOUT_STATS_PATH = "/home/injaejung/canon/yolo/pass_data_statitics/layout_stats.json"
+```
+
+#### 2. 추론 실행
 
 ```bash
 cd yolo/scripts
 python inference.py
 ```
 
+#### 3. 결과 확인
+
+- **추론 결과 이미지**: `yolo/val_inference_results/{NAME}/`
+- **검수 로그**: `yolo/val_inference_results/result_logs/{NAME}.txt`
+- **Case 실패 로그**: `yolo/val_inference_results/result_logs/{NAME}_case_only_fail.txt`
+
 ### UI 실행
+
+#### 1. 경로 설정
+
+`UI/ui.py` 파일을 열고 다음 경로들을 수정하세요:
+
+```python
+# 모델 가중치 경로
+MODEL_PATH = "/home/injaejung/canon/yolo/runs/segment/canon_yolo11m_1203/weights/best.pt"
+
+# PASS 데이터 통계 파일 경로
+LAYOUT_STATS_PATH = "/home/injaejung/canon/yolo/pass_data_statitics/layout_stats.json"
+```
+
+#### 2. UI 실행
 
 ```bash
 cd UI
