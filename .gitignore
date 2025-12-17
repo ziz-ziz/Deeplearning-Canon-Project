@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# YOLO
+yolo/runs/
+*.pt
+*.pth
+*.weights
+*.onnx
+
+# Data (용량이 큰 데이터셋은 제외)
+yolo/data/images/
+yolo/data/labels/
+
+# Results
+yolo/val_inference_results/
+*.jpg
+*.jpeg
+*.png
+*.bmp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Statistics (용량 큰 파일인 경우 제외)
+# yolo/pass_data_statitics/layout_stats.json
+
+# Temporary files
+*.tmp
+*.temp

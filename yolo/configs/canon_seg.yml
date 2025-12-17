@@ -1,0 +1,40 @@
+# 데이터 루트 경로
+path: /home/injaejung/canon/yolo/data
+
+train: images/train
+val: images/val
+
+# 클래스를 0~26까지 그대로 매핑 (이건 바꾸지마세요! - 인재)
+names:
+  0: home_eng
+  1: home_kor
+  2: home_jap
+  3: home_chi_1
+  4: home_chi_2
+  5: home_window
+  6: home_button
+
+  7: back_eng
+  8: back_kor
+  9: back_jap
+  10: back_chi
+  11: back_window
+  12: back_button
+
+  13: id_eng
+  14: id_kor
+  15: id_jap
+  16: id_chi
+  17: id_window
+  18: id_button
+
+  19: monitor_eng
+  20: monitor_kor
+  21: monitor_jap
+  22: monitor_chi_1
+  23: monitor_chi_2
+  24: monitor_window
+  25: monitor_button
+
+  26: screen
+  27: hand
